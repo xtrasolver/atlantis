@@ -944,7 +944,7 @@ func (e *EventParser) ParseAzureDevopsRepo(adRepo *azuredevops.GitRepository) (m
 		if strings.Contains(uri.Host, "visualstudio.com") {
 			owner = strings.Split(uri.Host, ".")[0]
 		} else {
-			owner = strings.Split(uri.Path, "/")[1]
+			owner = strings.Split(uri.Path, "/")[2]
 		}
 	}
 
@@ -965,7 +965,7 @@ func (e *EventParser) ParseAzureDevopsRepo(adRepo *azuredevops.GitRepository) (m
 	if strings.Contains(host, "visualstudio.com") {
 		cloneURL = fmt.Sprintf("https://%s/%s/_git/%s", host, project, repo)
 	} else {
-		cloneURL = fmt.Sprintf("https://%s/%s/%s/_git/%s", host, owner, project, repo)
+		cloneURL = fmt.Sprintf("https://%s/projects/%s/%s/_git/%s", host, owner, project, repo)
 	}
 	fmt.Println("%", cloneURL)
 	fullName := fmt.Sprintf("%s/%s/%s", owner, project, repo)
