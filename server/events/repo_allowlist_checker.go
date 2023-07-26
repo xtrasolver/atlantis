@@ -44,7 +44,8 @@ func NewRepoAllowlistChecker(allowlist string) (*RepoAllowlistChecker, error) {
 // IsAllowlisted returns true if this repo is in our allowlist and false
 // otherwise.
 func (r *RepoAllowlistChecker) IsAllowlisted(repoFullName string, vcsHostname string) bool {
-	candidate := fmt.Sprintf("%s/%s", vcsHostname, repoFullName)
+	candidate := fmt.Sprintf("%s/projects/%s", vcsHostname, repoFullName)
+	fmt.Println("candidate: %", candidate)
 	for _, rule := range r.rules {
 		if r.matchesRule(rule, candidate) {
 			return true
